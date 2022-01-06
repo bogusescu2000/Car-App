@@ -1,0 +1,88 @@
+﻿@using InAndOut.Models;
+@model CarModel
+@*
+
+    @foreach (var item in Model)
+    {
+        <p>@item.Id</p>
+        <p>@item.Name</p>
+        <p>@item.Age</p>
+        <img src="@item.CarImage" alt="Car-Image" />
+        <img src="@Url.Content("~/images/Feral.jpg")" alt="IMAGES" />
+    }
+*@
+
+<link rel="stylesheet" href="~/css/cars.css" />
+<div class="">
+    <h1 class="text-center my-4 pt-4">Cars catalog</h1>
+    <form asp-action="Index" asp-controller="Car" method="post">
+        <div class="col-12 text-right px-0 py-4">
+            <a asp-controller="Car" asp-action="Create" class="btn btn-info">Add new car</a>
+
+        </div>
+        <div class="row">
+
+            @foreach (Car item in Model.Cars) 
+            {
+            <div class="col-4 pb-4 my-2">
+                @*@Html.ActionLink(@item.Name, "Details", new {  @item.Id })*@
+                <h3 class="font-weight-light text-center px-2">@item.Name</h3>
+                <a asp-controller="Car" asp-action="Details" asp-route-Id="@item.Id">
+                    <div class="text-center"><img class="img-fluid" src="@Url.Content(item.CarImage)" /></div>
+                </a>
+                    <p class="text-center px-2">Year - @item.Age</p>
+
+                    <div class="text-center">
+                        <a asp-controller="Car" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-info w-40">Update</a>
+                        <a asp-controller="Car" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger w-40">Delete</a>
+                    </div>
+            </div>
+            }
+        </div>
+        <table cellpadding="0" cellspacing="0" class="pagination d-flex justify-content-center "   >
+            <tr class="text-center">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <td class="page-item ">
+                        @if (i != Model.CurrentPageIndex)
+                        {
+                            <a class="page-link mx-2 text-dark font-weight-bold" href="javascript:PagerClick(@i);">@i</a>
+                        }
+                        else
+                        {
+                            <span class="page-link mx-2 bg-info text-dark font-weight-bold">@i</span>
+                        }
+                    </td>
+                }
+            </tr>
+        </table>
+        <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" />
+    </form>
+    <script type="text/javascript">
+        function PagerClick(index) {
+            document.getElementById("hfCurrentPageIndex").value = index;
+            document.forms[0].submit();
+        }
+    </script>
+</div>
+@*
+        <h3>All data</h3>
+        @foreach (var item in Model)
+        {
+            <p><img src="@Url.Content(item.CarImage)"></p>
+        }
+
+
+
+    <h3>Выберите файл для загрузки</h3>
+    <form asp-action="AddCar" asp-controller="Cars" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploadedFile" /><br>
+        <input type="submit" value="Загрузить" />
+    </form>
+
+        <h3>Все файлы</h3>
+        @foreach (var f in Model)
+        {
+            <p><img src="@Url.Content(f.CarImage)"></p>
+        }
+*@

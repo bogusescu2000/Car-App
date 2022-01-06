@@ -1,0 +1,28 @@
+﻿@model InAndOut.Models.Car
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <input asp-for="Id" hidden />
+
+    <div class="container">
+        <div class="text-center font-weight-bold">
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+        </div>
+
+        <div class="text-center font-weight-lighter">
+            @Html.DisplayFor(model => model.Age)
+        </div>
+        <div class="text-center my-4">
+            <a class="btn btn-info " asp-action="Index">Back to Catalog</a>
+        </div>
+        <div class="text-center">
+            <img class="img-fluid img-thumbnail" style="max-width: 750px;  max-height: 500px;" src=" @Html.DisplayFor(model => model.CarImage)" alt="@Html.DisplayFor(model => model.Name)" />
+        </div>
+    </div>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
+    
+</div>

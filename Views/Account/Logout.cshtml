@@ -1,0 +1,21 @@
+﻿@model InAndOut.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Logout</h1>
+
+<div class="row" id="logout_form">
+        <form method="post" asp-action="LogoutAct">
+           
+            <button id="" type="submit" class="btn-primary">Login</button>
+        </form>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        jQuery('#modal').click();
+    });
+</script>
